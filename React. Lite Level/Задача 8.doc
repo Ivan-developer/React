@@ -1,0 +1,90 @@
+UNIT 14. НАВИГАЦИЯ САЙТА В REACT. REACT ROUTER
+Маршрутизация это когда мы переходим по сайту и набираем какой та адресс, маршрутизатор отвечает за загрузку какой та страницы 
+установить router в проект , package.json 
+
+1.	npm install
+2.	npm install --save react-router-dom
+
+что бы марштуризация работала надо добавить router 
+внутри <Switch> </Switch> - надо прописать те компоненты которые у меня буду загружаться 
+______________________________________________________________________________________________________
+1.	import React from "react";
+2.	import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+3.	import Home from "./Home";
+4.	import About from "./About";
+5.	import Contacts from "./Contact";
+6.	import Other from "./Other";
+7.	
+8.	class App extends React.Component {
+9.	  render() {
+10.	    return (
+11.	      <Router>
+12.	        <div className="try">
+13.	          <ul>
+14.	            <li>
+15.	              <a href="/">Main page</a>
+16.	            </li>
+17.	            <li>
+18.	              <a href="/about">About</a>
+19.	            </li>
+20.	            <li>
+21.	              <a href="/contacts">Contacts</a>
+22.	            </li>
+23.	          </ul>
+24.	          <Switch>
+25.	            <Route exact path="/" component={Home} />
+26.	            <Route exact path="/about" component={About} />
+27.	            <Route exact path="/contacts" component={Contacts} />
+28.	            <Route component={Other} />
+29.	          </Switch>
+30.	        </div>
+31.	      </Router>
+32.	    );
+33.	  }
+34.	}
+35.	
+36.	export default App;
+______________________________________________________________________________________________________
+1.	import React from "react";
+2.	
+3.	class Home extends React.Component {
+4.	
+5.	  render() {
+6.	    return <div>It is a home</div>;
+7.	  }
+8.	}
+9.	
+10.	export default Home;
+_____________________________________________________________________________________________________
+1.	import React from "react";
+2.	
+3.	class About extends React.Component {
+4.	
+5.	  render() {
+6.	    return <div>It is About</div>;
+7.	  }
+8.	}
+9.	
+10.	export default About;
+______________________________________________________________________________________________________
+1.	import React from "react";
+2.	
+3.	class Contact extends React.Component {
+4.	    
+5.	  render() {
+6.	    return <div>It is Contacts</div>;
+7.	  }
+8.	}
+9.	
+10.	export default Contact;
+_____________________________________________________________________________________________________
+1.	import React from "react";
+2.	
+3.	class Other extends React.Component {
+4.	
+5.	  render() {
+6.	    return <div>404</div>;
+7.	  }
+8.	}
+9.	
+10.	export default Other;

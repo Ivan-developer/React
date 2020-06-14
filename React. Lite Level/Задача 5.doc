@@ -1,0 +1,77 @@
+UNIT 10. РАБОТАЕМ С ФОРМАМИ. REACT. LITE LEVEL
+Создали в условии if() === <p> при какихта действиях 
+1.	class App extends React.Component {
+2.	  constructor(props) {
+3.	    super(props);
+4.	    this.state = {
+5.	      text: "",
+6.	    };
+7.	  }
+8.	  myInput = (e) => {
+9.	    console.log(e.target.value);
+10.	    this.setState({
+11.	      text: e.target.value,
+12.	    });
+13.	  };
+14.	  render() {
+15.	    let a = "";
+16.	    if (this.state.text) {
+17.	      a = <p>Your enter text: {this.state.text}</p>;
+18.	    } else {
+19.	      a = ''; 
+20.	    }
+21.	
+22.	    return (
+23.	      <div>
+24.	        <form>
+25.	          <input onChange={this.myInput} />
+26.	          {a}
+27.	        </form>
+28.	      </div>
+29.	    );
+30.	  }
+31.	}
+____________________________________________________________________________________________
+
+1.	class App extends React.Component {
+2.	  constructor(props) {
+3.	    super(props);
+4.	    this.state = {
+5.	      text: "",
+6.	      first_name: "",
+7.	      age: 0,
+8.	    };
+9.	  }
+10.	  myInput = (event) => {
+11.	    console.log(event.target.value);
+12.	    console.log(event.target.name);
+13.	    this.setState({
+14.	      [event.target.name]: event.target.value,
+15.	    });
+16.	  };
+17.	
+18.	  onSubmitForm = (event) => {
+19.	    event.preventDefault();
+20.	    console.log(this.state.text);
+21.	  };
+22.	  render() {
+23.	    let a = "";
+24.	    if (this.state.text) {
+25.	      a = <p>Your enter text: {this.state.text}</p>;
+26.	    } else {
+27.	      a = "";
+28.	    }
+29.	
+30.	    return (
+31.	      <div>
+32.	        <form onSubmit={this.onSubmitForm}>
+33.	          <input onChange={this.myInput} name="text" />
+34.	          <input onChange={this.myInput} type="number" name="age" />
+35.	          {a}
+36.	          <input type="submit" />
+37.	          <p> Age: {this.state.age}</p>
+38.	        </form>
+39.	      </div>
+40.	    );
+41.	  }
+42.	}

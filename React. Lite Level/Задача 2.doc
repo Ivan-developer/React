@@ -1,0 +1,46 @@
+Задача 2: Работа с props 
+⦁	Выведи объект из файла index.js в файл App.js через props
+⦁	Переведи его в массив и map() выведиключи
+⦁	Дополнительно, выведи значени title в <p>
+
+
+export default {
+  main: "/index",
+  about: "/about",
+  price: "/buy/price",
+};
+
+
+
+______________________________________________________________________________________
+
+import nav from './fixtures'
+
+index.js
+
+1.	
+2.	ReactDOM.render(<App tittle="I am props" nav={nav}/>, document.getElementById("root"));
+
+_________________________________________________________________________________________________
+
+1.	class App extends React.Component {
+2.	  render() {
+3.	    let nav = this.props.nav;
+4.	    return (
+5.	      <div className="try">
+6.	        <p>{this.props.title}</p>
+7.	        <nav>
+8.	          <ul>
+9.	            {Object.keys(nav).map((elem) => {
+10.	              return (
+11.	                <li>
+12.	                  <a href="{nav[elem]}">{elem}</a>
+13.	                </li>
+14.	              );
+15.	            })}
+16.	          </ul>
+17.	        </nav>
+18.	      </div>
+19.	    );
+20.	  }
+21.	}

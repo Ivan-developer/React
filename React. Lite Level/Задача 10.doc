@@ -1,0 +1,33 @@
+Задача 10. выведит список <li> из объекта с <a>  
+index.js
+
+1.	let nav = {
+2.	  main: "/index",
+3.	  about: "/about",
+4.	  price: "/buy/price",
+5.	};
+6.	
+7.	ReactDOM.render(<App nav={nav}/>, document.getElementById("root"));
+
+_________________________________________________________
+
+1.	class App extends React.Component {
+2.	  render() {
+3.	    let nav = this.props.nav;
+4.	    return (
+5.	      <div>
+6.	        <nav>
+7.	          <ul>
+8.	            {Object.keys(nav).map((elem) => {
+9.	              return (
+10.	                <li>
+11.	                  <a href="{nav[elem]}">{elem}</a>
+12.	                </li>
+13.	              );
+14.	            })}
+15.	          </ul>
+16.	        </nav>
+17.	      </div>
+18.	    );
+19.	  }
+20.	}

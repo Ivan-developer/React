@@ -1,0 +1,37 @@
+из JSX - нельзя вернуть два элемента рядом:
+1.	function Article (){
+2.	    return (
+3.	            <h2>title</h2>
+4.	            <section>body</section>
+5.	    )
+6.	}
+
+Решение: (надо обвернуть только одним элементом , два рядом не могут быть!)
+
+1. Первый Варианта вернуть массив , но тогда каждому элементу надо проставить ключ:
+1.	function Article (){
+2.	    return [
+3.	            <h2 key = 'a'>title</h2>,
+4.	            <section key = 'b'>body</section>
+5.	    ]
+6.	}
+
+1.	"use strict";
+2.	
+3.	function Article() {
+4.	  return [/*#__PURE__*/React.createElement("h2", {
+5.	    key: "a"
+6.	  }, "title"), /*#__PURE__*/React.createElement("section", {
+7.	    key: "b"
+8.	  }, "body")];
+9.	}
+
+2. Второй вариант: обвернуть 
+1.	function Article (){
+2.	    return (
+3.	            <div>
+4.	            <h2>title</h2>
+5.	            <section>body</section>
+6.	           </div>
+7.	        )
+8.	}

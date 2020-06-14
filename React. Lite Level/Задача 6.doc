@@ -1,0 +1,37 @@
+UNIT 11. ЖИЗНЕННЫЙ ЦИКЛ КОМПОНЕНТОВ
+метод getDerivedStateFromProps()  // props => запихнуть в state и манипулировать ими 
+Реакт ждет событие которое может наступить: от пользователя / таймера 
+метод setState() - изменяем состояние 
+
+⦁	ReactDOM.render(<App title="Hi" />, document.getElementById("root"));
+
+1.	class App extends React.Component{
+2.	  constructor(props){
+3.	    super(props);
+4.	    this.state = {
+5.	      text : 'Hello'
+6.	    }
+7.	  }
+8.	
+9.	  // props => state
+10.	  // static getDerivedStateFromProps (props, state){
+11.	  //   return { text: props.title}
+12.	  // }
+13.	
+14.	  // after render , если есть static - то метод не срабатывает
+15.	  componentDidMount() {
+16.	    setTimeout(()=>{
+17.	      this.setState({
+18.	        text: 'Component did mount'
+19.	      })
+20.	    }, 3000)
+21.	  }
+22.	
+23.	  render(){
+24.	    return(
+25.	      <div>
+26.	        <p>{this.state.text}</p>
+27.	      </div>
+28.	    )
+29.	  }
+30.	}

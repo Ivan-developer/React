@@ -1,0 +1,140 @@
+UNIT 12. ПРОСТАЯ ИГРА НА REACT
+Крестики - нолики 
+Каждое поле будет связано со state
+
+1.	class App extends React.Component {
+2.	  constructor(props) {
+3.	    super(props);
+4.	    this.state = {
+5.	      squares: Array(9).fill(null), // вывели пустую оболочку если пропишем [0,1,2,3,4,5,6,7,8] = то в каждой клетке будет от 0 и до 9
+6.	      count: 0,
+7.	    };
+8.	    this.winnerLine = [
+9.	      [0, 1, 2],
+10.	      [3, 4, 5],
+11.	      [6, 7, 8],
+12.	      [0, 3, 6],
+13.	      [1, 4, 7],
+14.	      [2, 5, 8],
+15.	      [0, 4, 8],
+16.	      [2, 4, 6],
+17.	    ];
+18.	  }
+19.	
+20.	  isWinner = () => {
+21.	    let s = this.state.count % 2 === 0 ? "X" : "O";
+22.	    for (let i = 0; i < 8; i++) {
+23.	      let line = this.winnerLine[i];
+24.	      if (
+25.	        this.state.squares[line[0]] === s && this.state.squares[line[1]] === s && this.state.squares[line[2]] === s
+26.	      ) {
+27.	        alert(s + "win");
+28.	        setTimeout(() => {
+29.	          this.setState({
+30.	            squares: Array(9).fill(null),
+31.	          });
+32.	          this.setState({
+33.	            count: 0,
+34.	          });
+35.	        }, 3000);
+36.	      }
+37.	    }
+38.	  };
+39.	
+40.	  clickHandler = (event) => {
+41.	    // data - номер квадрата по которому кликнули
+42.	    let data = event.target.getAttribute("data");
+43.	    // промежуточная переменная
+44.	    let currentSquares = this.state.squares;
+45.	    // присвоили каждому полю
+46.	    // что бы нельзя было два раза кликать на поле и не менять Х О
+47.	    if (currentSquares[data] === null) {
+48.	      currentSquares[data] = this.state.count % 2 === 0 ? "X" : "0";
+49.	      this.setState({
+50.	        count: this.state.count + 1,
+51.	      });
+52.	      this.setState({
+53.	        squares: currentSquares,
+54.	      });
+55.	    } else {
+56.	      alert("Так нельзя!!!!");
+57.	    }
+58.	    // метод который позволит проверять на выиграшь
+59.	    this.isWinner();
+60.	  };
+61.	
+62.	  render() {
+63.	    return (
+64.	      <div className="tic-tac-toe">
+65.	        <div className="ttt-grid" onClick={this.clickHandler} data="0">
+66.	          {this.state.squares[0]}
+67.	        </div>
+68.	        <div className="ttt-grid" onClick={this.clickHandler} data="1">
+69.	          {this.state.squares[1]}
+70.	        </div>
+71.	        <div className="ttt-grid" onClick={this.clickHandler} data="2">
+72.	          {this.state.squares[2]}
+73.	        </div>
+74.	        <div className="ttt-grid" onClick={this.clickHandler} data="3">
+75.	          {this.state.squares[3]}
+76.	        </div>
+77.	        <div className="ttt-grid" onClick={this.clickHandler} data="4">
+78.	          {this.state.squares[4]}
+79.	        </div>
+80.	        <div className="ttt-grid" onClick={this.clickHandler} data="5">
+81.	          {this.state.squares[5]}
+82.	        </div>
+83.	        <div className="ttt-grid" onClick={this.clickHandler} data="6">
+84.	          {this.state.squares[6]}
+85.	        </div>
+86.	        <div className="ttt-grid" onClick={this.clickHandler} data="7">
+87.	          {this.state.squares[7]}
+88.	        </div>
+89.	        <div className="ttt-grid" onClick={this.clickHandler} data="8">
+90.	          {this.state.squares[8]}
+91.	        </div>
+92.	      </div>
+93.	    );
+94.	  }
+95.	}
+
+1.	.App {
+2.	  text-align: center;
+3.	}
+4.	
+5.	.App-logo{
+6.	  height: 10vmin;
+7.	}
+8.	
+9.	.tic-tac-toe{
+10.	  width: 150px;
+11.	  height: 150px;
+12.	  border: 2px solid black;
+13.	  margin: 50px auto;
+14.	}
+15.	
+16.	.ttt-grid{
+17.	  width: 50px;
+18.	  height: 50px;
+19.	  border: 1px solid black;
+20.	  /* Можно это сделать Flex */
+21.	  float: left;
+22.	  box-sizing: border-box; 
+23.	}
+
+Showing 1-5 of 5 items.
+#	ТЕКСТ ЗАДАЧИ
+1	
+Создайте игру крестики-нолики на основе видео.
+
+2	
+Добавьте в игру возможность "ничья" - когда количество ходов исчерпалось, и поле заполнено.
+
+3	
+Добавьте кнопку - начать новую игру, которая обнуляет и очищает поле.
+
+4	
+Добавьте глобальный счет - т.е. количество побед крестиков и ноликов - в течении нескольких партий.
+
+5	
+Добавьте возможность выбора крестиков или ноликов для первого хода.

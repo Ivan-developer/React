@@ -1,0 +1,41 @@
+Задача 4: Распиши в работе: 
+1. событие onClick => поменяй состояние объекту при нажатии на кнопку
+2. событие onInput => выведи в консоль
+3. событие onMouseMove => выведи в консоль при наведении
+
+1.	class App extends React.Component {
+2.	  constructor(props) {
+3.	    super(props); 
+4.	    this.state = {
+5.	      text: "Hello",
+6.	      text2: 555,
+7.	    };
+8.	  }
+9.	
+10.	  showText = () => {
+11.	    this.setState({
+12.	      text: "Hi",
+13.	    });
+14.	  };
+15.	
+16.	  showText2 = (event) => {
+17.	    this.setState({ text2: event.target.value }); // таким способом мы перехват что вели в инпут
+18.	    console.log(event.target.value);
+19.	  };
+20.	
+21.	  move = (event) => {
+22.	    console.log(event.target.textContent)
+23.	  }
+24.	
+25.	  render() {
+26.	    return (
+27.	      <div>
+28.	        <button onClick={this.showText}>Push1</button>
+29.	        <input onInput={this.showText2} />
+30.	        <div onMouseMove={this.move}>Lorem</div>
+31.	        <p>{this.state.text}</p>
+32.	        <p>{this.state.text2}</p>
+33.	      </div>
+34.	    );
+35.	  }
+36.	}

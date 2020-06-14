@@ -1,0 +1,33 @@
+Задача номер 3 - изменяем состояние объекта:
+
+props - нужны для того что бы передать информацию внутрь компонента 
+state - нужны что бы манипулировать информацией внутри компонента 
+
+Меняем состояние элемента: 
+метод setState()
+
+1.	class Nav extends React.Component {
+2.	  constructor(props) {
+3.	    super(props);
+4.	    this.state = {
+5.	      show: "show",
+6.	    };
+7.	  }
+8.	
+9.	  showNav = () => {
+10.	    this.setState({ show: "hide" }); 
+11.	  };
+12.	
+13.	  render() {
+14.	    return (
+15.	      <div>
+16.	            <button onClick={this.showNav}>
+17.	                Show menu
+18.	            </button>
+19.	        <p>{this.state.show}</p>
+20.	              </div>
+21.	    );
+22.	  }
+23.	}
+24.	
+25.	export default Nav;

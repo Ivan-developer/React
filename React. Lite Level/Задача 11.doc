@@ -1,0 +1,183 @@
+15. Задача 11. Как из внешнего файла с массивом объектов , вытащить объект в нужный компонент? Ответ: - через деструктуризацию
+
+fixtures.js - массив с объектами которые мы будем передавать функции: 
+export default [
+    {
+     'id' : '0685881980',
+     'date' : '2020-08-08T16:03:02.000z',
+     'title' : 'This is title Vvvv',
+     'text' : 'this is TEXT Gggg',
+     'comments' : [
+         {
+             'id' : 'Vanya',
+             'user' : 'Vanya users',
+             'text' : 'This is Vanya text',
+         },
+         {
+            'id' : 'Gena',
+            'user' : 'Gena users',
+            'text' : 'This is Gena text',
+        },
+        {
+            'id' : 'Tom',
+            'user' : 'Tom users',
+            'text' : 'This is Tom text',
+        }
+     ] 
+    }
+]
+______________________________________________________________________
+
+1.	import React from 'react'
+2.	import Article from './Article'
+3.	import articles from '../fixtures'
+4.	
+5.	function App(){
+6.	    return (
+7.	        <div>
+8.	            <h1>App name</h1>         
+9.	            <Article article={articles[0]} foo='bar' flag='true' name='false' years/>    
+10.	        </div>
+11.	    )
+12.	}
+13.	
+14.	// передать во внутрь article , писать как будто атрибут article={articles[0]} - 0 это первая статья
+15.	// <Article article={articles[0]} foo='bar' flag='true' name='false' years/> в props мы можем передавать что угодно, это обычный плоский объект , который будет приходить ключ : значение, (значение прийдет как строка)
+16.	
+17.	export default App
+
+______________________________________________________________________
+
+Передаем в пройтую функцию:
+
+1.	import React from "react";
+2.	
+3.	function Article(props) {
+4.	  // через аргумент передали нужные данные и принято называть props
+5.	  const { article } = props; // через деструктуризацию получим статью
+6.	  console.log('---', props); // посмотрим в кансоль что нам выведет props - {article: {…}, foo: "bar", flag: "true", name: "false", years: true}
+7.	  const body = <section>{article.text}</section>; // все переменные можем использовать внутри jsx
+8.	  return (
+9.	    <div className="hello" style={{ color: "red" }}>
+10.	      <h2>{article.title}</h2>
+11.	      {body}
+12.	      <h3>creation date: { (new Date(article.date)).toDateString()}</h3>
+13.	    </div>
+14.	  );
+15.	}
+16.	
+17.	export default Article;
+
+______________________________________________________________________
+
+Старый синтексист
+1.	import React from "react"
+2.	
+3.	// Давай подумаем как мы будем открывать и закрывать наш текст?
+4.	// Компонент может находиться в разных состояниях
+5.	
+6.	function Article(props) {
+7.	  const { article } = props; 
+8.	  const body = <section>{article.text}</section>; 
+9.	  return (
+10.	    <div className="hello" style={{ color: "red" }}>
+11.	      <h2>
+12.	          {article.title}
+13.	          <button onClick={handleClick}>close</button>
+14.	          </h2>
+15.	      {body}
+16.	      <h3>creation date: { (new Date(article.date)).toDateString()}</h3>
+17.	    </div>
+18.	  );
+19.	} 
+20.	
+21.	function handleClick() {
+22.	    console.log('clicked')
+23.	}
+24.	
+25.	// <button onClick={handleClick}>close</button> - повесили обработчик , {передали функцию}
+26.	
+27.	export default Article;
+
+_________________________________________________________
+Через констуктор: 
+1.	// Напишем комонент на новый синтексис:
+2.	
+3.	import React, { Component } from "react";
+4.	
+5.	class Article extends Component {
+6.	  constructor(props) {
+7.	    super(props);
+8.	    this.state = {
+9.	      isOpen: false, 
+10.	    };
+11.	 
+12.	    this.handleClick = handleClick.bind(this) 
+13.	
+14.	  }
+15.	
+16.	//   Записали короче: 
+17.	//   state = {
+18.	//     isOpen: false // если false то закрытая если true то открытая
+19.	//   }
+20.	
+21.	  render() {
+22.	    const { article } = this.props;
+23.	    console.log(this.props); // сылка на объект
+24.	    const body = this.state.isOpen && <section>{article.text}</section>;
+25.	    return (
+26.	      <div className="hello" style={{ color: "red" }}>
+27.	        <h2>
+28.	          {article.title}
+29.	          <button onClick={this.handleClick}>close</button>
+30.	        </h2>
+31.	        {body}
+32.	        <h3>creation date: {new Date(article.date).toDateString()}</h3>
+33.	      </div>
+34.	    );
+35.	  }
+36.	}
+37.	
+38.	function handleClick() {
+39.	  console.log("clicked");
+40.	}
+41.	
+42.	// <button onClick={handleClick}>close</button> - повесили обработчик , {передали функцию}
+43.	
+44.	export default Article;
+
+__________________________________________________
+Перезаписал в эксперементальный синтексист: 
+1.	// Напишем комонент на новый синтексис:
+2.	
+3.	import React, { Component } from "react";
+4.	
+5.	class Article extends Component {
+6.	  state = {
+7.	    isOpen: false, 
+8.	  };
+9.	
+10.	  render() {
+11.	    const { article } = this.props;
+12.	    const body = this.state.isOpen && <section>{article.text}</section>;
+13.	    return (
+14.	      <div>
+15.	        <h2>
+16.	          {article.title}
+17.	          <button onClick={this.handleClick}>
+18.	              {this.state.isOpen ? 'colse' : 'open'}
+19.	          </button>
+20.	        </h2>
+21.	        {body}
+22.	        <h3>creation date: {new Date(article.date).toDateString()}</h3>
+23.	      </div>
+24.	    );
+25.	  }
+26.	  handleClick = () => {
+27.	      this.setState({
+28.	          isOpen: !this.state.isOpen
+29.	      })
+30.	  }
+31.	}
+32.	
+33.	export default Article;

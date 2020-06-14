@@ -1,0 +1,73 @@
+Задача №1: 
+1. Что такое XML ? JSX is an XML. JSX is an XML/HTML-like syntax used by React that extends ECMAScript so that XML/HTML-like text can co-exist with JavaScript/React code. ... Unlike the past, instead of putting JavaScript into HTML, JSX allows us to put HTML into JavaScript.
+ Выведи:
+1.	state = {
+        start : 'I am start'
+    }
+2.	Переменную const variable = 'I am variable'
+3.	props из внешнего файла (аргументы которые находятся в props)
+4.	запиши метод test() который вернет 111
+5.	сложи в return() 1 + 1 
+6.	Запиши метод Math.random()
+7.	Сделай главному <div> класс try 
+8.	напиши input с атрибутом defaultValue и в нем запиши ''Hello'', обрати внимание как пишется input , в коротком синтаксисте 
+9.	Выведи строку Hello my friend
+10.	Выведи {true && 'Hello'} / {false && 'Hello'} => посмотри отличия <p>{true}</p> // элемент выведится пустым
+11.	html entities => https://www.w3schools.com/html/html_entities.asp         & ampersand &amp; &#38;
+12.	Создайт в параграфе атрибут name и выведи name у объекта const user = {name : 'Ivan', lastName: 'B.'}, посмотри в кансоле что будет, выведи весь объект черех spread оператор {...user}
+13.	выведи объект user.name в <p>
+14.	запиши компонент Article и подключи его , что выдаст если записать с маленькой буквы? jsx => babel => js like string
+15.	Выведи внутри списка <ul> списком элементы из массива const array = ['hello', 'my', 'darling'] 1) юзай map() 2) на кажой итерации создавай <li> </li> + Warning: Each child in a list should have a unique "key" prop. добавь уникальный ключ что бы убрать ошибку 
+16.	style мы записываем как выражение: style={{ }}
+
+Вывод: в props хронятся аргументы , можно хранить переменные , state это состояние объекта , в { } мы можем записывать все что угодно
+
+⦁	ReactDOM.render(<App tittle="I am props" />, document.getElementById("root"));
+
+___________________________________________________________________________________________________
+
+1.	import React from "react";
+2.	import Article from "./Article"
+3.	
+4.	class App extends React.Component {
+5.	  constructor(props) {
+6.	    super(props);
+7.	    this.state = {
+8.	      start: "I am start",
+9.	    };
+10.	  }
+11.	
+12.	  test() {
+13.	    return 111;
+14.	  }
+15.	
+16.	  render() {
+17.	    const variable = "I am variable";
+18.	    const user = { name: "Ivan", lastname: "Ivanov" };
+19.	    const array = ['hello', 'my', 'darling'];
+20.	    return (
+21.	      <div className="try">
+22.	        <p>{this.state.start}</p>
+23.	        <p>{variable}</p>
+24.	        <p>{this.props.tittle}</p>
+25.	        <p>{this.test()}</p>
+26.	        <p>{1 + 1}</p>
+27.	        <p>{Math.random()}</p>
+28.	        <input defaultValue="Hello" />
+29.	        <p>{"Hello my friend"}</p>
+30.	        <p>{true && "Hello"}</p>
+31.	        <p>&#38;</p>
+32.	        <p name={user.name}></p>
+33.	        <p>{user.name}</p>
+34.	        <p {...user}></p>
+35.	        <Article />
+36.	        <ul>
+37.	          {array.map(elem => <li key={elem}>{elem}</li>)}
+38.	        </ul>
+39.	        <p style={{ color: '#fff' }}>I am style</p>
+40.	      </div>
+41.	    );
+42.	  }
+43.	}
+44.	
+45.	export default App;

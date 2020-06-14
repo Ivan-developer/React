@@ -1,0 +1,29 @@
+ Задача 9. Как ты реализуешь в коде механизм , при котором на нажатие на кнопку
+будет появляться текст 
+
+1.	class App extends React.Component {
+2.	  constructor(props) {
+3.	    super(props);
+4.	    this.state = {
+5.	      tittle: false,
+6.	    };
+7.	  }
+8.	
+9.	  toDo = () => {
+10.	    this.setState({
+11.	      tittle: !this.state.tittle, // !false === true 
+12.	    });
+13.	  };
+14.	
+15.	  render() {
+16.	
+17.	    let apear = this.state.tittle && <p>Lets do it together</p>;
+18.	
+19.	    return (
+20.	      <div className="try">
+21.	        <button onClick={this.toDo}>Go</button>
+22.	        {apear}
+23.	      </div>
+24.	    );
+25.	  }
+26.	}
